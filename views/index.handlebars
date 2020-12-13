@@ -1,0 +1,54 @@
+{{!-- with context of hbsObject {burger: []} --}}
+<main class="container-fluid">
+    <div class="row">
+        <aside class="container-fluid col-4 bg-dark rounded mt-2">
+            <h2 class="text-center text-white"> Burgers to Eat!</h2>
+            <ul>
+                {{#each burger}}
+                    {{#unless devoured}}
+                <div type="button" onclick="devour(this)" data-burger_id={{this.id}} class="card mx-auto bg-active mt-2 btn-outline-danger">
+                    <div class="card-body">
+                        {{this.burger_name}}
+                    </div>
+                </div>
+                    {{/unless}}
+                {{/each}}
+            </ul>
+        </aside>
+        <div class"container-fluid col-1"></div>
+        <aside class="container-fluid col-4 bg-dark rounded mt-2">
+            <h2 class="text-center text-white">Devoured Burgers</h2>
+            <ul>
+            {{#each burger}}
+                {{#if devoured}}
+                    <li>
+                        {{this.burger_name}}
+                        <button onclick="delete(this)" data-burger_id={{this.id}} > Delete it!</button>
+                    </li>
+                {{/if}}
+            {{/each}}
+            </ul>
+        </aside>
+    </div>
+
+
+<form action = "/api/newburger" method="POST">
+    <textarea name = "burger_name"> </textarea>
+        <button type = "submit">Submit</button>
+        <center><label for="new_burger" class="red_font">Enter a your choice of burger and press submit!</label></center>
+</form>
+</main>
+<script>
+    function devour(btn){
+        //wrap btn with jquery
+        let $btn = $(btn);
+
+        let id = $btn.data('burger_id');
+        $.ajax("/api/updateburger/" + id, {
+            type: "PUT",
+            data: id
+        }).then(function (){
+            location.reload();
+        });
+    }
+    </script>
