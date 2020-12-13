@@ -1,5 +1,5 @@
 var mysql = require("mysql");
-require("dotenv").confit();
+require("dotenv").config();
 
 var connection;
 if(process.env.JAWSDB_URL){
