@@ -15,28 +15,34 @@
                 {{/each}}
             </ul>
         </aside>
-        <div class"container-fluid col-1"></div>
+        <div class"container-fluid col-1">
+            <br><br><br>
+        </div>
         <aside class="container-fluid col-4 bg-dark rounded mt-2">
             <h2 class="text-center text-white">Devoured Burgers</h2>
             <ul>
             {{#each burger}}
                 {{#if devoured}}
-                    <li>
-                        {{this.burger_name}}
-                        <button onclick="delete(this)" data-burger_id={{this.id}} > Delete it!</button>
-                    </li>
+                    <div class="card mx-auto bg-secondary mt-2">
+                        <div class="card-body">
+                            {{this.burger_name}}    
+                        </div>
+                    </div>
                 {{/if}}
             {{/each}}
             </ul>
         </aside>
     </div>
 
-
-<form action = "/api/newburger" method="POST">
-    <textarea name = "burger_name"> </textarea>
-        <button type = "submit">Submit</button>
-        <center><label for="new_burger" class="red_font">Enter a your choice of burger and press submit!</label></center>
-</form>
+    <div class="row">
+        <form class="create-form container col-3" action = "/api/newburger" method="POST">
+            <h2 class="text-center text-white">Enter your choice of burger and press submit!</h2>
+            <div class="form-group">
+                <input class="form-control" rows ="4" placeholder="Enter Burger" name = "burger_name"> </textarea>
+                <button type = "submit" class="btn btn-danger btn-lg mt-3 mx-auto">Submit</button>
+            </div>
+        </form>
+    </div>
 </main>
 <script>
     function devour(btn){
